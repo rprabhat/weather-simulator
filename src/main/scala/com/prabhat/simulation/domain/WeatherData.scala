@@ -19,7 +19,7 @@ case class Hour(value: Int)
 case class Minute(value: Int)
 case class Sec(value: Int)
 case class LocalTime(year: Year, month: Month, day: Day, hour: Hour, min: Minute, sec: Sec){
-  override  def toString = s"${year.value}-${month.value}-${day.value} ${hour.value}:${min.value}:${sec.value}"
+  override  def toString = f"${year.value}-${month.value}%02d-${day.value}%02d ${hour.value}%02d:${min.value}%02d:${sec.value}%02d"
 }
 
 

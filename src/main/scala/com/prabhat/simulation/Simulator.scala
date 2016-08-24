@@ -28,15 +28,15 @@ object Simulator extends App {
   } yield LocalTime(year, month, day, hour, min, sec)
 
   def genAtmosphere(month : Int) = for {
-    tempature <- {
+    temperature <- {
       val monthMinMax = Configuration.TemperatureConfig.get(month).map(a => MinMax[Double](a._1, a._2)).get
       Gen.choose(monthMinMax).map(Temperature)
     }
     humidity <- Gen.chooseInt(Configuration.humidityConfig.minMax).map(Humidity)
     pressure <- Gen.choose(Configuration.pressureConfig.minMax).map(Pressure)
-  } yield Atmosphere(tempature, pressure, humidity)
+  } yield Atmosphere(temperature, pressure, humidity)
 
-  val genCondition = Gen.const[Condition](Rain)
+  def genCondition(atmosphere: Atmosphere) = Gen.const[Condition](Condition(atmosphere))
 
 
 
@@ -45,7 +45,7 @@ object Simulator extends App {
     position <- genPosition
     localTime <- genTimestamp
     atmosphere <- genAtmosphere(localTime.month.value)
-    condition <- genCondition
+    condition <- genCondition(atmosphere)
   } yield WeatherData(label, position,localTime , condition, atmosphere)
 
   Gen.generate(10)(genWeatherData).foreach(println)
