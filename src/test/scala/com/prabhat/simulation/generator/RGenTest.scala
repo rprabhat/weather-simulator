@@ -1,4 +1,4 @@
-package com.prabhat.simulation.util
+package com.prabhat.simulation.generator
 
 import org.scalatest.{Matchers, FlatSpec}
 import org.scalatest.matchers.Matcher
