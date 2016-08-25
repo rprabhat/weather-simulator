@@ -25,6 +25,6 @@ sbt clean; sbt compile; sbt run
 ## Improvements
  * More unit tests
  * More dependency between generators to  make it realistic
- * Generate data validation ( eg timstamp validation ) 
+ * Validation for generated data eg timstamp validation ) 
 
 
